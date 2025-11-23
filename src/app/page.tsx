@@ -6,6 +6,7 @@ import { StockTicker } from "@/components/StockTicker";
 import { Hero3D } from "@/components/Hero3D";
 import { AnimatedStats } from "@/components/AnimatedStats";
 import { PageLoader } from "@/components/PageLoader";
+import { ScrollStepper } from "@/components/ScrollStepper";
 
 export default function Home() {
   return (
@@ -125,6 +126,50 @@ export default function Home() {
                   </Link>
                 </div>
               </FadeIn>
+            </div>
+          </section>
+
+          {/* How It Works Section */}
+          <section className="py-32 px-6 border-b border-black/5 relative overflow-hidden">
+            {/* Grid Lines Background (Blueprint Style) */}
+            <div
+              className="absolute inset-0 opacity-10 pointer-events-none"
+              style={{
+                backgroundImage: `
+                  linear-gradient(to right, rgba(0, 0, 0, 0.5) 1px, transparent 1px),
+                  linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 1px, transparent 1px)
+                `,
+                backgroundSize: '40px 40px',
+              }}
+            />
+
+            <div className="max-w-7xl mx-auto relative z-10">
+              <div className="mb-20">
+                <h2 className="text-4xl md:text-6xl font-bold tracking-tighter mb-6">How It Works</h2>
+                <p className="text-xl text-black/60 max-w-2xl">
+                  Get started with tokenized stocks in four simple steps.
+                </p>
+              </div>
+              <ScrollStepper
+                steps={[
+                  {
+                    title: "Connect Your Wallet",
+                    description: "Link your Web3 wallet to the KR4 platform. We support MetaMask, WalletConnect, and other popular Lisk-compatible wallets.",
+                  },
+                  {
+                    title: "Deposit IDRX Stablecoin",
+                    description: "Fund your account with IDRX, our native stablecoin pegged to Indonesian Rupiah. Swap from other tokens or deposit directly.",
+                  },
+                  {
+                    title: "Browse & Buy Stocks",
+                    description: "Explore global stocks tokenized on Lisk. Buy fractional shares with IDRX instantly, no traditional broker needed.",
+                  },
+                  {
+                    title: "Earn & Trade",
+                    description: "Hold your stocks, add them to liquidity pools to earn yield, or trade them 24/7 on our decentralized exchange.",
+                  },
+                ]}
+              />
             </div>
           </section>
 
