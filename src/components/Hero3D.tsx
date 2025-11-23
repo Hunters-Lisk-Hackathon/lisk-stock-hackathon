@@ -20,7 +20,7 @@ function Hero3DComponent() {
             .then((data) => setCountries(data));
 
         // Generate fewer arcs (reduced from 8 to 5)
-        const N = 20;
+        const N = 10;
         const arcs = [...Array(N).keys()].map(() => ({
             startLat: (Math.random() - 0.5) * 180,
             startLng: (Math.random() - 0.5) * 360,
