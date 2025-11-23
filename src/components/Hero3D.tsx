@@ -20,7 +20,7 @@ function Hero3DComponent() {
             .then((data) => setCountries(data));
 
         // Generate fewer arcs (reduced from 8 to 5)
-        const N = 5;
+        const N = 20;
         const arcs = [...Array(N).keys()].map(() => ({
             startLat: (Math.random() - 0.5) * 180,
             startLng: (Math.random() - 0.5) * 360,
@@ -30,16 +30,6 @@ function Hero3DComponent() {
         }));
 
         setArcsData(arcs);
-
-        // Setup controls - NO AUTO-ROTATE (save CPU)
-        if (globeEl.current) {
-            const controls = globeEl.current.controls();
-            controls.autoRotate = false; // Disabled for performance
-            controls.enableZoom = false;
-            controls.enablePan = false;
-            controls.minDistance = controls.maxDistance = 350;
-            globeEl.current.pointOfView({ altitude: 1.8 });
-        }
     }, []);
 
     // Prevent zoom on wheel event
@@ -84,7 +74,18 @@ function Hero3DComponent() {
                 arcDashAnimateTime={4000}
                 arcStroke={1}
 
-            // NO RINGS (removed for performance)
+                // NO RINGS (removed for performance)
+                onGlobeReady={() => {
+                    if (globeEl.current) {
+                        const controls = globeEl.current.controls();
+                        controls.autoRotate = true;
+                        controls.autoRotateSpeed = 0.5;
+                        controls.enableZoom = false;
+                        controls.enablePan = false;
+                        controls.minDistance = controls.maxDistance = 350;
+                        globeEl.current.pointOfView({ altitude: 1.8 });
+                    }
+                }}
             />
         </div>
     );
