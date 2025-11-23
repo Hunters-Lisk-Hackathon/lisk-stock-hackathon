@@ -1,40 +1,19 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
 
-type Stock = {
-    symbol: string;
-    price: string;
-    change: string;
-    up: boolean;
-};
+const stocks = [
+    { symbol: "AAPL", price: "182.50", change: "+1.2%", up: true },
+    { symbol: "TSLA", price: "240.10", change: "-0.5%", up: false },
+    { symbol: "NVDA", price: "485.90", change: "+2.8%", up: true },
+    { symbol: "MSFT", price: "370.20", change: "+0.9%", up: true },
+    { symbol: "GOOGL", price: "138.40", change: "-0.2%", up: false },
+    { symbol: "AMZN", price: "145.80", change: "+1.5%", up: true },
+    { symbol: "COIN", price: "155.60", change: "+4.2%", up: true },
+    { symbol: "MSTR", price: "590.00", change: "+5.1%", up: true },
+];
 
 export function StockTicker() {
-    const [stocks, setStocks] = useState<Stock[]>([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        async function fetchStocks() {
-            try {
-                const res = await fetch("/api/stocks");
-                const data = await res.json();
-                setStocks(data);
-            } catch (error) {
-                console.error("Failed to fetch stocks", error);
-            } finally {
-                setLoading(false);
-            }
-        }
-
-        fetchStocks();
-        // Refresh every 60 seconds
-        const interval = setInterval(fetchStocks, 60000);
-        return () => clearInterval(interval);
-    }, []);
-
-    if (loading) return <div className="h-9 bg-black/5 border-y border-black/5" />;
-
     return (
         <div className="w-full bg-black/5 border-y border-black/5 overflow-hidden py-2 flex items-center">
             <div className="flex whitespace-nowrap">
@@ -44,10 +23,9 @@ export function StockTicker() {
                     transition={{
                         repeat: Infinity,
                         ease: "linear",
-                        duration: 30,
+                        duration: 20,
                     }}
                 >
-                    {/* Duplicate list 4 times for smooth infinite scroll */}
                     {[...stocks, ...stocks, ...stocks, ...stocks].map((stock, i) => (
                         <div key={i} className="flex items-center gap-2 text-sm font-medium">
                             <span className="text-black/80">{stock.symbol}</span>
