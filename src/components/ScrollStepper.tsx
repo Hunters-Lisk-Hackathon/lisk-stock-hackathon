@@ -34,7 +34,7 @@ export function ScrollStepper({ steps }: ScrollStepperProps) {
     }, [scrollYProgress, steps.length]);
 
     return (
-        <div ref={containerRef} className="space-y-16 md:space-y-20">
+        <div ref={containerRef} className="space-y-12 md:space-y-20">
             {steps.map((step, index) => (
                 <motion.div
                     key={index}
@@ -42,7 +42,7 @@ export function ScrollStepper({ steps }: ScrollStepperProps) {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className="relative pl-8 md:pl-10"
+                    className="relative pl-6 md:pl-10"
                 >
                     {/* Left Accent Bar */}
                     <motion.div
@@ -55,7 +55,7 @@ export function ScrollStepper({ steps }: ScrollStepperProps) {
 
                     {/* Step Number Badge */}
                     <motion.div
-                        className="inline-block px-3 py-1 rounded-full text-xs font-bold mb-4 border"
+                        className="inline-block px-3 py-1 rounded-full text-xs font-bold mb-3 md:mb-4 border"
                         animate={{
                             borderColor: index <= activeStep ? "#000" : "rgba(0,0,0,0.15)",
                             backgroundColor: index <= activeStep ? "#000" : "transparent",
@@ -67,10 +67,10 @@ export function ScrollStepper({ steps }: ScrollStepperProps) {
                     </motion.div>
 
                     {/* Content */}
-                    <h3 className="text-2xl md:text-3xl font-bold tracking-tight mb-3">
+                    <h3 className="text-xl md:text-3xl font-bold tracking-tight mb-2 md:mb-3">
                         {step.title}
                     </h3>
-                    <p className="text-black/60 text-lg leading-relaxed max-w-2xl">
+                    <p className="text-black/60 text-base md:text-lg leading-relaxed max-w-2xl">
                         {step.description}
                     </p>
                 </motion.div>

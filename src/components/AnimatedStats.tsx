@@ -88,11 +88,11 @@ export function AnimatedStats() {
     };
 
     return (
-        <div ref={ref} className="w-full py-12 border-b border-black/5 bg-white/50 backdrop-blur-sm">
-            <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div ref={ref} className="w-full py-8 md:py-12 border-b border-black/5 bg-white/50 backdrop-blur-sm">
+            <div className="max-w-7xl mx-auto px-4 md:px-6 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center">
                 {stats.map((stat, index) => (
                     <div key={index} className="flex flex-col items-center">
-                        <div className="text-3xl md:text-4xl font-bold tracking-tight mb-2 font-mono">
+                        <div className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-1 md:mb-2 font-mono">
                             {isInView ? (
                                 stat.ticker ? (
                                     <span>

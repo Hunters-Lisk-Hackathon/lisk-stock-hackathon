@@ -39,8 +39,8 @@ export function SpotlightCard({ children, className = "" }: SpotlightCardProps) 
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             className={`relative overflow-hidden rounded-3xl border transition-all duration-500 ${isHovered
-                    ? 'border-black/20 shadow-xl shadow-black/10 -translate-y-2 scale-[1.02]'
-                    : 'border-black/10 shadow-lg'
+                ? 'border-black/20 shadow-xl shadow-black/10 -translate-y-1 md:-translate-y-2 md:scale-[1.02]'
+                : 'border-black/10 shadow-lg'
                 } bg-white/50 backdrop-blur-md ${className}`}
         >
             <div

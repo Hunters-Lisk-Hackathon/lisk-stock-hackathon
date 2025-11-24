@@ -27,7 +27,7 @@ export function StockTicker() {
                     }}
                 >
                     {[...stocks, ...stocks, ...stocks, ...stocks].map((stock, i) => (
-                        <div key={i} className="flex items-center gap-2 text-sm font-medium">
+                        <div key={i} className="flex items-center gap-2 text-[13px] md:text-sm font-medium">
                             <span className="text-black/80">{stock.symbol}</span>
                             <span className="text-black/60">${stock.price}</span>
                             <span className={stock.up ? "text-green-600" : "text-red-500"}>

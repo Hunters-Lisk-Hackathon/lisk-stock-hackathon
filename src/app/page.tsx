@@ -37,7 +37,7 @@ export default function Home() {
         </div>
 
         <nav className="fixed top-0 w-full z-50 border-b border-black/5 bg-white/70 backdrop-blur-md transition-all duration-300">
-          <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+          <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
             <div className="text-xl font-bold tracking-tighter">KR4</div>
             <div className="hidden md:flex gap-8 text-sm font-medium text-black/60">
               <Link href="#" className="hover:text-black transition-colors">Markets</Link>
@@ -69,16 +69,16 @@ export default function Home() {
               }}
             />
 
-            <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-8 lg:gap-16 items-center py-20 relative z-10">
+            <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-6 lg:gap-16 items-center py-12 md:py-20 relative z-10">
               <div className="flex flex-col justify-center">
                 <FadeIn delay={0.2} direction="up">
-                  <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-6 lg:mb-8">
+                  <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-4 md:mb-6 lg:mb-8">
                     <span className="text-gradient">Tokenized Stocks</span> <br />
                     <span className="text-black/40 tracking-tighter">on Lisk.</span>
                   </h1>
                 </FadeIn>
                 <FadeIn delay={0.4} direction="up">
-                  <p className="text-lg md:text-xl lg:text-2xl text-black/60 max-w-2xl mb-8 lg:mb-12 leading-relaxed">
+                  <p className="text-base md:text-lg lg:text-xl text-black/60 max-w-2xl mb-6 md:mb-8 lg:mb-12 leading-relaxed">
                     Buy global stocks with <strong className="text-black">IDRX</strong>. Low fees, instant settlement, and secured on the <strong className="text-black">Lisk L2</strong> blockchain.
                   </p>
                 </FadeIn>
@@ -86,13 +86,13 @@ export default function Home() {
                   <div className="flex flex-col sm:flex-row gap-4">
                     <Link
                       href="https://dclex-dex.netlify.app/"
-                      className="btn-glow px-8 py-4 bg-black text-white text-lg font-medium rounded-full hover:bg-gray-800 transition-all hover:scale-105 active:scale-95 inline-flex items-center justify-center shadow-lg hover:shadow-2xl hover:shadow-black/30 tracking-wide"
+                      className="btn-glow px-6 md:px-8 py-3 md:py-4 bg-black text-white text-base md:text-lg font-medium rounded-full hover:bg-gray-800 transition-all hover:scale-105 active:scale-95 inline-flex items-center justify-center shadow-lg hover:shadow-2xl hover:shadow-black/30 tracking-wide"
                     >
                       Start Trading
                     </Link>
                     <Link
                       href="#"
-                      className="px-8 py-4 border border-black/20 text-black text-lg font-medium rounded-full hover:bg-black/5 transition-all hover:scale-105 active:scale-95 inline-flex items-center justify-center backdrop-blur-sm tracking-wide"
+                      className="px-6 md:px-8 py-3 md:py-4 border border-black/20 text-black text-base md:text-lg font-medium rounded-full hover:bg-black/5 transition-all hover:scale-105 active:scale-95 inline-flex items-center justify-center backdrop-blur-sm tracking-wide"
                     >
                       Learn More
                     </Link>
@@ -110,8 +110,8 @@ export default function Home() {
 
           <AnimatedStats />
 
-          <section className="py-24 px-6 border-b border-black/5 relative">
-            <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-12 relative z-10">
+          <section className="py-12 md:py-24 px-4 md:px-6 border-b border-black/5 relative">
+            <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-6 md:gap-12 relative z-10">
               <FadeIn delay={0.1} className="h-full">
                 <SpotlightCard className="h-full p-8 group">
                   <h3 className="text-2xl font-semibold mb-4 group-hover:text-black/80 transition-colors">Buy with IDRX</h3>
@@ -148,11 +148,11 @@ export default function Home() {
             </div>
           </section>
 
-          <section className="py-32 px-6 border-b border-black/5 relative overflow-hidden">
+          <section className="py-16 md:py-32 px-4 md:px-6 border-b border-black/5 relative overflow-hidden">
             <div className="max-w-7xl mx-auto relative z-10">
-              <div className="mb-20">
-                <h2 className="text-4xl md:text-6xl font-bold tracking-tighter mb-6">How It Works</h2>
-                <p className="text-xl text-black/60 max-w-2xl">
+              <div className="mb-12 md:mb-20">
+                <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tighter mb-4 md:mb-6">How It Works</h2>
+                <p className="text-base md:text-lg lg:text-xl text-black/60 max-w-2xl">
                   Get started with tokenized stocks in four simple steps.
                 </p>
               </div>
@@ -179,18 +179,18 @@ export default function Home() {
             </div>
           </section>
 
-          <section className="py-24 px-6">
+          <section className="py-12 md:py-24 px-4 md:px-6">
             <div className="max-w-7xl mx-auto">
               <FadeIn delay={0.2}>
-                <div className="mb-16">
-                  <h2 className="text-4xl md:text-6xl font-bold tracking-tighter mb-6">Compliant and Secure</h2>
-                  <p className="text-xl text-black/60 max-w-2xl">
+                <div className="mb-8 md:mb-16">
+                  <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tighter mb-4 md:mb-6">Compliant and Secure</h2>
+                  <p className="text-base md:text-lg lg:text-xl text-black/60 max-w-2xl">
                     Built with institutional-grade security and full regulatory compliance in mind.
                   </p>
                 </div>
               </FadeIn>
 
-              <div className="grid md:grid-cols-3 gap-8 border-t border-black/10 pt-12">
+              <div className="grid md:grid-cols-3 gap-6 md:gap-8 border-t border-black/10 pt-8 md:pt-12">
                 <FadeIn delay={0.3}>
                   <div>
                     <h4 className="text-lg font-semibold mb-2">Licensed & Regulated</h4>
@@ -220,12 +220,12 @@ export default function Home() {
           </section>
         </main>
 
-        <footer className="py-12 px-6 border-t border-black/10 bg-white/50 backdrop-blur-sm relative z-10">
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="text-sm text-black/40">
+        <footer className="py-8 md:py-12 px-4 md:px-6 border-t border-black/10 bg-white/50 backdrop-blur-sm relative z-10">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
+            <div className="text-xs md:text-sm text-black/40">
               © 2025 KR4. All rights reserved.
             </div>
-            <div className="flex gap-6 text-sm text-black/40">
+            <div className="flex gap-4 md:gap-6 text-xs md:text-sm text-black/40">
               <Link href="#" className="hover:text-black transition-colors">Privacy</Link>
               <Link href="#" className="hover:text-black transition-colors">Terms</Link>
               <Link href="#" className="hover:text-black transition-colors">Twitter</Link>

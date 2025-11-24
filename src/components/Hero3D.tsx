@@ -29,6 +29,23 @@ function Hero3DComponent() {
         setArcsData(arcs);
     }, []);
 
+    const [dimensions, setDimensions] = useState({ width: 650, height: 650 });
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (containerRef.current) {
+                const width = containerRef.current.clientWidth;
+                // On mobile, we might want a slightly smaller height or keep it square-ish
+                const height = Math.min(width, 650);
+                setDimensions({ width, height });
+            }
+        };
+
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     const handleWheel = (e: React.WheelEvent) => {
         e.preventDefault();
         e.stopPropagation();
@@ -37,14 +54,14 @@ function Hero3DComponent() {
     return (
         <div
             ref={containerRef}
-            className="w-full h-[450px] md:h-[550px] relative flex items-center justify-center cursor-move mix-blend-multiply"
+            className="w-full h-[350px] md:h-[550px] relative flex items-center justify-center cursor-move mix-blend-multiply overflow-hidden"
             onWheel={handleWheel}
             style={{ touchAction: 'pan-y' }}
         >
             <Globe
                 ref={globeEl}
-                width={650}
-                height={650}
+                width={dimensions.width}
+                height={dimensions.height}
                 backgroundColor="rgba(0,0,0,0)"
                 globeImageUrl="//unpkg.com/three-globe/example/img/earth-water.png"
                 globeMaterial={
