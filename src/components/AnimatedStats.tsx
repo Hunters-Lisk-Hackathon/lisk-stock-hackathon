@@ -4,12 +4,53 @@ import CountUp from "react-countup";
 import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 
+// Base timestamp - all calculations are based on elapsed time since this date
+// This ensures all devices show the same value at the same time
+const BASE_TIMESTAMP = new Date('2025-11-23T00:00:00Z').getTime();
+
 const stats = [
-    { label: "Total Volume", value: 10000000, prefix: "$", suffix: "", decimals: 0, ticker: true, increment: 1, interval: 100 },
-    { label: "Active Users", value: 50000, prefix: "", suffix: "", decimals: 0, ticker: true, increment: 1, interval: 100000 },
-    { label: "Trade Latency", value: 0.01, prefix: "< ", suffix: "s", decimals: 2, ticker: false },
-    { label: "Assets Listed", value: 150, prefix: "", suffix: "+", decimals: 0, ticker: false },
+    {
+        label: "Total Volume",
+        baseValue: 0,
+        prefix: "$",
+        suffix: "",
+        decimals: 0,
+        ticker: true,
+        incrementPerSecond: 10 // Adds $10 per second
+    },
+    {
+        label: "Active Users",
+        baseValue: 0,
+        prefix: "",
+        suffix: "",
+        decimals: 0,
+        ticker: true,
+        incrementPerSecond: 0.01 // Adds ~1 user per 100 seconds
+    },
+    {
+        label: "Trade Latency",
+        baseValue: 0.01,
+        prefix: "< ",
+        suffix: "s",
+        decimals: 2,
+        ticker: false
+    },
+    {
+        label: "Assets Listed",
+        baseValue: 150,
+        prefix: "",
+        suffix: "+",
+        decimals: 0,
+        ticker: false
+    },
 ];
+
+// Calculate current value based on elapsed time
+const calculateTimeBasedValue = (baseValue: number, incrementPerSecond: number): number => {
+    const now = Date.now();
+    const elapsedSeconds = (now - BASE_TIMESTAMP) / 1000;
+    return baseValue + (elapsedSeconds * incrementPerSecond);
+};
 
 export function AnimatedStats() {
     const ref = useRef(null);
@@ -17,42 +58,26 @@ export function AnimatedStats() {
     const [liveValues, setLiveValues] = useState<{ [key: number]: number }>({});
 
     useEffect(() => {
-        if (isInView) {
-            const initialValues: { [key: number]: number } = {};
-            stats.forEach((stat, index) => {
-                if (stat.ticker) {
-                    const savedValue = localStorage.getItem(`stat_${index}`);
-                    initialValues[index] = savedValue ? parseInt(savedValue, 10) : 0;
-                }
-            });
-            setLiveValues(initialValues);
-        }
-    }, [isInView]);
-
-    useEffect(() => {
         if (!isInView) return;
 
-        const intervals: NodeJS.Timeout[] = [];
-
-        stats.forEach((stat, index) => {
-            if (stat.ticker) {
-                const interval = setInterval(() => {
-                    setLiveValues((prev) => {
-                        const newValue = (prev[index] || 0) + (stat.increment || 1);
-                        localStorage.setItem(`stat_${index}`, newValue.toString());
-                        return {
-                            ...prev,
-                            [index]: newValue,
-                        };
-                    });
-                }, stat.interval);
-                intervals.push(interval);
-            }
-        });
-
-        return () => {
-            intervals.forEach((interval) => clearInterval(interval));
+        // Initial calculation
+        const updateValues = () => {
+            const newValues: { [key: number]: number } = {};
+            stats.forEach((stat, index) => {
+                if (stat.ticker && stat.incrementPerSecond !== undefined) {
+                    newValues[index] = calculateTimeBasedValue(stat.baseValue, stat.incrementPerSecond);
+                }
+            });
+            setLiveValues(newValues);
         };
+
+        // Update immediately
+        updateValues();
+
+        // Update every 0.1 second for smooth animation (increments by 1 every 0.1s)
+        const interval = setInterval(updateValues, 100);
+
+        return () => clearInterval(interval);
     }, [isInView]);
 
     const formatNumber = (num: number, decimals: number) => {
@@ -78,7 +103,7 @@ export function AnimatedStats() {
                                 ) : (
                                     <CountUp
                                         start={0}
-                                        end={stat.value}
+                                        end={stat.baseValue}
                                         duration={2.5}
                                         separator=","
                                         decimals={stat.decimals}
