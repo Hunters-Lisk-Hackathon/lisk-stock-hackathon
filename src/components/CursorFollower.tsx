@@ -1,66 +1,80 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, useSpring } from "framer-motion";
 
 export function CursorFollower() {
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-    const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const visibilityRef = useRef(false);
+  const frameRef = useRef<number | null>(null);
+  const latestMouse = useRef({ x: 0, y: 0 });
 
-    useEffect(() => {
-        const updateMousePosition = (e: MouseEvent) => {
-            setMousePosition({ x: e.clientX, y: e.clientY });
-            if (!isVisible) setIsVisible(true);
-        };
+  const dotX = useSpring(0, { stiffness: 500, damping: 28, mass: 0.5 });
+  const dotY = useSpring(0, { stiffness: 500, damping: 28, mass: 0.5 });
+  const ringX = useSpring(0, { stiffness: 150, damping: 20, mass: 0.8 });
+  const ringY = useSpring(0, { stiffness: 150, damping: 20, mass: 0.8 });
 
-        const handleMouseLeave = () => {
-            setIsVisible(false);
-        };
+  useEffect(() => {
+    const flushAnimationFrame = () => {
+      const { x, y } = latestMouse.current;
+      dotX.set(x - 4);
+      dotY.set(y - 4);
+      ringX.set(x - 16);
+      ringY.set(y - 16);
+      frameRef.current = null;
+    };
 
-        window.addEventListener("mousemove", updateMousePosition);
-        document.addEventListener("mouseleave", handleMouseLeave);
+    const updateMousePosition = (event: MouseEvent) => {
+      latestMouse.current = { x: event.clientX, y: event.clientY };
 
-        return () => {
-            window.removeEventListener("mousemove", updateMousePosition);
-            document.removeEventListener("mouseleave", handleMouseLeave);
-        };
-    }, [isVisible]);
+      if (!visibilityRef.current) {
+        visibilityRef.current = true;
+        setIsVisible(true);
+      }
 
-    if (!isVisible) return null;
+      if (frameRef.current === null) {
+        frameRef.current = requestAnimationFrame(flushAnimationFrame);
+      }
+    };
 
-    return (
-        <>
-            <motion.div
-                className="pointer-events-none fixed z-[9998] hidden md:block"
-                animate={{
-                    x: mousePosition.x - 4,
-                    y: mousePosition.y - 4,
-                }}
-                transition={{
-                    type: "spring",
-                    stiffness: 500,
-                    damping: 28,
-                    mass: 0.5,
-                }}
-            >
-                <div className="h-2 w-2 rounded-full bg-black/30" />
-            </motion.div>
+    const handleMouseLeave = () => {
+      visibilityRef.current = false;
+      setIsVisible(false);
+      if (frameRef.current !== null) {
+        cancelAnimationFrame(frameRef.current);
+        frameRef.current = null;
+      }
+    };
 
-            <motion.div
-                className="pointer-events-none fixed z-[9997] hidden md:block"
-                animate={{
-                    x: mousePosition.x - 16,
-                    y: mousePosition.y - 16,
-                }}
-                transition={{
-                    type: "spring",
-                    stiffness: 150,
-                    damping: 20,
-                    mass: 0.8,
-                }}
-            >
-                <div className="h-8 w-8 rounded-full border border-black/20" />
-            </motion.div>
-        </>
-    );
+    window.addEventListener("mousemove", updateMousePosition);
+    document.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      window.removeEventListener("mousemove", updateMousePosition);
+      document.removeEventListener("mouseleave", handleMouseLeave);
+      if (frameRef.current !== null) {
+        cancelAnimationFrame(frameRef.current);
+      }
+    };
+  }, [dotX, dotY, ringX, ringY]);
+
+  if (!isVisible) return null;
+
+  return (
+    <>
+      <motion.div
+        className="pointer-events-none fixed z-[9998] hidden md:block"
+        style={{ x: dotX, y: dotY }}
+      >
+        <div className="h-2 w-2 rounded-full bg-black/30" />
+      </motion.div>
+
+      <motion.div
+        className="pointer-events-none fixed z-[9997] hidden md:block"
+        style={{ x: ringX, y: ringY }}
+      >
+        <div className="h-8 w-8 rounded-full border border-black/20" />
+      </motion.div>
+    </>
+  );
 }
