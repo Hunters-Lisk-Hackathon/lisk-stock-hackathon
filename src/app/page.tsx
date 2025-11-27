@@ -8,6 +8,7 @@ import { SpotlightCard } from "@/components/SpotlightCard";
 import { CursorFollower } from "@/components/CursorFollower";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { MobileMenu } from "@/components/MobileMenu";
+import { BackToTop } from "@/components/BackToTop";
 
 const AnimatedStats = dynamic(() => import("@/components/AnimatedStats").then(mod => ({ default: mod.AnimatedStats })), {
   loading: () => <div className="w-full h-32" />,
@@ -25,6 +26,7 @@ export default function Home() {
       <ScrollProgress />
       <CursorFollower />
       <PageLoader />
+      <BackToTop />
       <div className="min-h-screen bg-white text-black selection:bg-black selection:text-white overflow-hidden relative bg-dot-grid">
         <div className="fixed inset-0 w-full h-full bg-noise z-0 pointer-events-none mix-blend-multiply opacity-50"></div>
 
@@ -41,9 +43,9 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
             <div className="text-xl font-bold tracking-tighter">KR4</div>
             <div className="hidden md:flex gap-8 text-sm font-medium text-black/60">
-              <Link href="#" className="hover:text-black transition-colors">Markets</Link>
-              <Link href="#" className="hover:text-black transition-colors">Governance</Link>
-              <Link href="#" className="hover:text-black transition-colors">Developers</Link>
+              <Link href="#markets" className="hover:text-black transition-colors">Markets</Link>
+              <Link href="#governance" className="hover:text-black transition-colors">Governance</Link>
+              <Link href="#developers" className="hover:text-black transition-colors">Developers</Link>
             </div>
             <div className="flex items-center gap-4">
               <Link
@@ -95,7 +97,7 @@ export default function Home() {
                       Start Trading
                     </Link>
                     <Link
-                      href="#"
+                      href="#developers"
                       className="px-6 md:px-8 py-3 md:py-4 border border-black/20 text-black text-base md:text-lg font-medium rounded-full hover:bg-black/5 transition-all hover:scale-105 active:scale-95 inline-flex items-center justify-center backdrop-blur-sm tracking-wide"
                     >
                       Learn More
@@ -114,7 +116,7 @@ export default function Home() {
 
           <AnimatedStats />
 
-          <section className="py-12 md:py-24 px-4 md:px-6 border-b border-black/5 relative">
+          <section id="markets" className="py-12 md:py-24 px-4 md:px-6 border-b border-black/5 relative scroll-mt-20">
             <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-6 md:gap-12 relative z-10">
               <FadeIn delay={0.1} className="h-full">
                 <SpotlightCard className="h-full p-8 group">
@@ -152,7 +154,7 @@ export default function Home() {
             </div>
           </section>
 
-          <section className="py-16 md:py-32 px-4 md:px-6 border-b border-black/5 relative overflow-hidden">
+          <section id="developers" className="py-16 md:py-32 px-4 md:px-6 border-b border-black/5 relative scroll-mt-20">
             <div className="max-w-7xl mx-auto relative z-10">
               <div className="mb-12 md:mb-20">
                 <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tighter mb-4 md:mb-6">How It Works</h2>
@@ -183,7 +185,7 @@ export default function Home() {
             </div>
           </section>
 
-          <section className="py-12 md:py-24 px-4 md:px-6">
+          <section id="governance" className="py-12 md:py-24 px-4 md:px-6 scroll-mt-20">
             <div className="max-w-7xl mx-auto">
               <FadeIn delay={0.2}>
                 <div className="mb-8 md:mb-16">

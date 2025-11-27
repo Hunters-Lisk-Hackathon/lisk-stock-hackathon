@@ -25,9 +25,9 @@ export function MobileMenu() {
     const closeMenu = () => setIsOpen(false);
 
     const menuLinks = [
-        { label: "Markets", href: "#" },
-        { label: "Governance", href: "#" },
-        { label: "Developers", href: "#" },
+        { label: "Markets", href: "#markets" },
+        { label: "Governance", href: "#governance" },
+        { label: "Developers", href: "#developers" },
     ];
 
     return (
