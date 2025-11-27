@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit, Plus_Jakarta_Sans, Space_Mono } from "next/font/google";
 import "./globals.css";
+import { PannaProvider } from "@/components/providers/PannaProvider";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -39,13 +40,17 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
         <link rel="dns-prefetch" href="https://unpkg.com" />
       </head>
       <body
         className={`${outfit.variable} ${jakarta.variable} ${spaceMono.variable} font-sans antialiased`}
       >
-        {children}
+        <PannaProvider>{children}</PannaProvider>
       </body>
     </html>
   );

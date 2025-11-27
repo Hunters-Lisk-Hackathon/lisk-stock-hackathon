@@ -127,3 +127,48 @@ body {
     transform: translate(0px, 0px) scale(1);
   }
 }
+
+/* GPU-accelerated shimmer animation for PageLoader */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Slow bounce for ready indicator */
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(-5px) translateZ(0);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0) translateZ(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+/* Slow pulse for ready text */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 3s linear infinite;
+  animation-delay: 0.5s;
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 2s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 2s ease-in-out infinite;
+}

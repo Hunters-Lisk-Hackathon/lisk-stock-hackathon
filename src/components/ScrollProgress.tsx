@@ -1,33 +1,54 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export function ScrollProgress() {
-    const [scrollProgress, setScrollProgress] = useState(0);
+    const scrollProgress = useMotionValue(0);
+    const scaleX = useSpring(scrollProgress, {
+        stiffness: 100,
+        damping: 30,
+        restDelta: 0.001
+    });
+    
+    const rafRef = useRef<number | undefined>(undefined);
 
     useEffect(() => {
         const updateScrollProgress = () => {
             const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
             const scrolled = window.scrollY;
-            const progress = (scrolled / scrollHeight) * 100;
-            setScrollProgress(progress);
+            const progress = scrollHeight > 0 ? (scrolled / scrollHeight) : 0;
+            scrollProgress.set(progress);
         };
 
-        window.addEventListener("scroll", updateScrollProgress);
-        updateScrollProgress();
+        const handleScroll = () => {
+            // Cancel previous frame
+            if (rafRef.current) {
+                cancelAnimationFrame(rafRef.current);
+            }
+            
+            // Update on next frame
+            rafRef.current = requestAnimationFrame(updateScrollProgress);
+        };
 
-        return () => window.removeEventListener("scroll", updateScrollProgress);
-    }, []);
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        updateScrollProgress(); // Initial call
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            if (rafRef.current) {
+                cancelAnimationFrame(rafRef.current);
+            }
+        };
+    }, [scrollProgress]);
 
     return (
         <motion.div
             className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-black/20 via-black to-black/20 origin-left z-[100]"
             style={{
-                scaleX: scrollProgress / 100,
+                scaleX,
+                willChange: "transform"
             }}
-            initial={{ scaleX: 0 }}
-            transition={{ duration: 0.1, ease: "easeOut" }}
         />
     );
 }
