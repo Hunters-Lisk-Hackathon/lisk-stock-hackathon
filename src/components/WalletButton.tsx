@@ -10,8 +10,11 @@ export function WalletButton() {
 
   if (account) {
     return (
-      <button className={BUTTON_STYLES.primary}>
-        {formatAddress(account.address)}
+      <button className={BUTTON_STYLES.classic}>
+        <span className="relative z-10 flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+          {formatAddress(account.address)}
+        </span>
       </button>
     );
   }
@@ -20,7 +23,18 @@ export function WalletButton() {
     <LoginButton
       connectButton={{
         label: "Connect Wallet",
-        className: BUTTON_STYLES.primary,
+        className: BUTTON_STYLES.classic,
+        style: {
+          backgroundColor: "#ffffff",
+          border: "1px solid #000000",
+          color: "#000000",
+          borderRadius: "9999px",
+          fontWeight: "500", // medium
+          fontSize: "14px", // text-sm
+          padding: "8px 16px", // restore padding
+          height: "auto", // override default height
+          minHeight: "unset", // ensure no min-height
+        },
       }}
     />
   );

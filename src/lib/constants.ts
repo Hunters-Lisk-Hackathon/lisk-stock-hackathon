@@ -1,8 +1,10 @@
 // UI Constants
 export const BUTTON_STYLES = {
-    primary: "px-6 py-2.5 bg-black text-white rounded-lg font-medium text-sm hover:bg-black/90 transition-colors",
+    primary: "px-6 py-2.5 bg-black text-white rounded-full font-medium text-sm hover:bg-gray-800 transition-all hover:scale-105 active:scale-95 shadow-md hover:shadow-lg",
     secondary: "px-6 md:px-8 py-3 md:py-4 border border-black/20 text-black text-base md:text-lg font-medium rounded-full hover:bg-black/5 transition-all hover:scale-105 active:scale-95 inline-flex items-center justify-center backdrop-blur-sm tracking-wide",
     cta: "btn-glow px-6 md:px-8 py-3 md:py-4 bg-black text-white text-base md:text-lg font-medium rounded-full hover:bg-gray-800 transition-all hover:scale-105 active:scale-95 inline-flex items-center justify-center shadow-lg hover:shadow-2xl hover:shadow-black/30 tracking-wide",
+    glass: "px-6 py-2.5 bg-white/10 backdrop-blur-md border border-black/10 text-black font-medium rounded-full text-sm hover:bg-black/5 transition-all hover:scale-105 active:scale-95 shadow-sm hover:shadow-md",
+    classic: "px-4 py-1.5 !bg-white !border !border-solid !border-black !text-black font-medium rounded-full text-sm hover:!bg-black hover:!text-white transition-all hover:scale-105 active:scale-95 shadow-sm",
 } as const;
 
 // Animation Constants
