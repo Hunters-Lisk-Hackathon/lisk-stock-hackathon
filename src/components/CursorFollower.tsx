@@ -2,14 +2,31 @@
 
 import { useEffect, useState, useRef } from "react";
 import { motion, useSpring } from "framer-motion";
+import { CURSOR } from "@/lib/constants";
 
 export function CursorFollower() {
     const [isVisible, setIsVisible] = useState(false);
-    const cursorX = useSpring(0, { stiffness: 500, damping: 28, mass: 0.5 });
-    const cursorY = useSpring(0, { stiffness: 500, damping: 28, mass: 0.5 });
-    const ringX = useSpring(0, { stiffness: 150, damping: 20, mass: 0.8 });
-    const ringY = useSpring(0, { stiffness: 150, damping: 20, mass: 0.8 });
-    
+    const cursorX = useSpring(0, {
+        stiffness: CURSOR.dotStiffness,
+        damping: CURSOR.dotDamping,
+        mass: CURSOR.dotMass
+    });
+    const cursorY = useSpring(0, {
+        stiffness: CURSOR.dotStiffness,
+        damping: CURSOR.dotDamping,
+        mass: CURSOR.dotMass
+    });
+    const ringX = useSpring(0, {
+        stiffness: CURSOR.ringStiffness,
+        damping: CURSOR.ringDamping,
+        mass: CURSOR.ringMass
+    });
+    const ringY = useSpring(0, {
+        stiffness: CURSOR.ringStiffness,
+        damping: CURSOR.ringDamping,
+        mass: CURSOR.ringMass
+    });
+
     const rafRef = useRef<number | undefined>(undefined);
 
     useEffect(() => {
@@ -20,12 +37,12 @@ export function CursorFollower() {
             mouseX = e.clientX;
             mouseY = e.clientY;
             if (!isVisible) setIsVisible(true);
-            
+
             // Cancel previous frame
             if (rafRef.current) {
                 cancelAnimationFrame(rafRef.current);
             }
-            
+
             // Update on next frame
             rafRef.current = requestAnimationFrame(() => {
                 cursorX.set(mouseX - 4);

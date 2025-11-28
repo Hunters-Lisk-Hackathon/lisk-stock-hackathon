@@ -1,30 +1,28 @@
 import { createPannaClient, liskSepolia, EcosystemId } from "panna-sdk";
 
-// Environment variables
-const clientId = process.env.NEXT_PUBLIC_PANNA_CLIENT_ID!;
-const partnerId = process.env.NEXT_PUBLIC_PANNA_PARTNER_ID!;
+// Environment variables with fallbacks for build time
+const clientId = process.env.NEXT_PUBLIC_PANNA_CLIENT_ID || "";
+const partnerId = process.env.NEXT_PUBLIC_PANNA_PARTNER_ID || "";
 
-if (!clientId) {
-  throw new Error(
-    "NEXT_PUBLIC_PANNA_CLIENT_ID is not defined in environment variables",
-  );
+// Runtime validation (will log warnings instead of throwing)
+if (typeof window !== "undefined") {
+  if (!clientId) {
+    console.warn("NEXT_PUBLIC_PANNA_CLIENT_ID is not defined in environment variables");
+  }
+  if (!partnerId) {
+    console.warn("NEXT_PUBLIC_PANNA_PARTNER_ID is not defined in environment variables");
+  }
 }
 
-if (!partnerId) {
-  throw new Error(
-    "NEXT_PUBLIC_PANNA_PARTNER_ID is not defined in environment variables",
-  );
-}
-
-// Create Panna client instance
+// Create Panna client instance (will use placeholder if not set)
 export const pannaClient = createPannaClient({
-  clientId,
+  clientId: clientId || "placeholder-client-id",
 });
 
 // Export ecosystem config
 export const ecosystem = {
   id: EcosystemId.LISK,
-  partnerId,
+  partnerId: partnerId || "placeholder-partner-id",
 };
 
 // Export chain configuration

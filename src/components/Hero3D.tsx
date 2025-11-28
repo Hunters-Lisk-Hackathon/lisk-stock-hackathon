@@ -1,8 +1,10 @@
 "use client";
 
-import { useEffect, useState, useRef, memo } from "react";
+import { useEffect, useState, useRef, memo, useMemo } from "react";
 import dynamic from "next/dynamic";
 import * as THREE from "three";
+import { GLOBE } from "@/lib/constants";
+import { debounce } from "@/lib/utils";
 
 const Globe = dynamic(() => import("react-globe.gl"), { ssr: false });
 
@@ -17,8 +19,7 @@ function Hero3DComponent() {
             .then((res) => res.json())
             .then((data) => setCountries(data));
 
-        const N = 10;
-        const arcs = [...Array(N).keys()].map(() => ({
+        const arcs = [...Array(GLOBE.arcCount).keys()].map(() => ({
             startLat: (Math.random() - 0.5) * 180,
             startLng: (Math.random() - 0.5) * 360,
             endLat: (Math.random() - 0.5) * 180,
@@ -29,21 +30,25 @@ function Hero3DComponent() {
         setArcsData(arcs);
     }, []);
 
-    const [dimensions, setDimensions] = useState({ width: 650, height: 650 });
+    const [dimensions, setDimensions] = useState<{ width: number; height: number }>({
+        width: GLOBE.defaultHeight,
+        height: GLOBE.defaultHeight
+    });
 
     useEffect(() => {
         const handleResize = () => {
             if (containerRef.current) {
                 const width = containerRef.current.clientWidth;
-                // On mobile, we might want a slightly smaller height or keep it square-ish
-                const height = Math.min(width, 650);
+                const height = Math.min(width, GLOBE.defaultHeight);
                 setDimensions({ width, height });
             }
         };
 
+        const debouncedResize = debounce(handleResize, 150);
+
         handleResize();
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
+        window.addEventListener('resize', debouncedResize);
+        return () => window.removeEventListener('resize', debouncedResize);
     }, []);
 
     const handleWheel = (e: React.WheelEvent) => {
@@ -86,11 +91,11 @@ function Hero3DComponent() {
                     if (globeEl.current) {
                         const controls = globeEl.current.controls();
                         controls.autoRotate = true;
-                        controls.autoRotateSpeed = 0.5;
+                        controls.autoRotateSpeed = GLOBE.autoRotateSpeed;
                         controls.enableZoom = false;
                         controls.enablePan = false;
-                        controls.minDistance = controls.maxDistance = 350;
-                        globeEl.current.pointOfView({ altitude: 1.8 });
+                        controls.minDistance = controls.maxDistance = GLOBE.minMaxDistance;
+                        globeEl.current.pointOfView({ altitude: GLOBE.altitude });
                     }
                 }}
             />

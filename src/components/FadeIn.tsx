@@ -3,14 +3,8 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
-
-type FadeInProps = {
-    children: React.ReactNode;
-    className?: string;
-    delay?: number;
-    direction?: "up" | "down" | "left" | "right";
-    scale?: number;
-};
+import { SCROLL, ANIMATION } from "@/lib/constants";
+import type { FadeInProps } from "@/types";
 
 export function FadeIn({
     children,
@@ -20,7 +14,7 @@ export function FadeIn({
     scale,
 }: FadeInProps) {
     const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, margin: "-50px" });
+    const isInView = useInView(ref, { once: true, margin: SCROLL.fadeInMargin });
 
     const directionOffset = {
         up: { y: 40, x: 0 },
@@ -52,9 +46,9 @@ export function FadeIn({
                     }
             }
             transition={{
-                duration: 0.8,
+                duration: ANIMATION.durations.slow,
                 delay: delay,
-                ease: [0.34, 1.56, 0.64, 1], // Bounce ease for scale
+                ease: ANIMATION.easing.bounce,
             }}
             className={cn(className)}
         >
