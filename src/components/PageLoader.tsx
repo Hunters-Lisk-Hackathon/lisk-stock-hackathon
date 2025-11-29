@@ -112,33 +112,21 @@ export function PageLoader() {
               <div className="absolute inset-0 flex items-center justify-center">
                 <motion.div
                   animate={{
-                    scale: [1, 1.03, 1],
+                    scale: [1, 1.05, 1],
                   }}
                   transition={{
-                    duration: 2.5,
+                    duration: 2,
                     repeat: Infinity,
                     ease: "easeInOut",
                   }}
                   style={{ willChange: "transform" }}
-                  className="relative"
+                  className="relative w-20 h-20 flex items-center justify-center"
                 >
-                  <h1 className="text-5xl font-bold tracking-tighter text-gradient relative">
-                    Stako
-                    {/* Shimmer Effect - optimized */}
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-20"
-                      animate={{
-                        x: ["-100%", "200%"],
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: "linear",
-                        repeatDelay: 1.5,
-                      }}
-                      style={{ willChange: "transform" }}
-                    />
-                  </h1>
+                  <img
+                    src="/images/stako-icon-black.png"
+                    alt="Stako Logo"
+                    className="w-full h-full object-contain"
+                  />
                 </motion.div>
               </div>
             </div>
