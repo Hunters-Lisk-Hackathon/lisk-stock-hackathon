@@ -3,7 +3,7 @@ import NextImage from "next/image";
 import dynamic from "next/dynamic";
 import { FadeIn } from "@/components/FadeIn";
 import { StockTicker } from "@/components/StockTicker";
-import { Hero3D } from "@/components/Hero3D";
+// import { Hero3D } from "@/components/Hero3D";
 import { PageLoader } from "@/components/PageLoader";
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { CursorFollower } from "@/components/CursorFollower";
@@ -148,7 +148,7 @@ export default function Home() {
 
               <FadeIn delay={0.8} direction="up" scale={0.85}>
                 <div className="parallax-globe">
-                  <Hero3D />
+                  {/* <Hero3D /> */}
                 </div>
               </FadeIn>
             </div>
@@ -181,24 +181,24 @@ export default function Home() {
               <FadeIn delay={0.2} className="h-full">
                 <SpotlightCard className="h-full p-8 group">
                   <h3 className="text-2xl font-semibold mb-4 group-hover:text-black/80 transition-colors">
-                    Earn Yield on Stocks
+                    Fractional Ownership
                   </h3>
                   <p className="text-black/50 mb-6 leading-relaxed">
-                    Add your stocks to liquidity pools on Lisk and earn a share
-                    of fees on every swap.
+                    Own a piece of your favorite companies. Buy fractional shares
+                    starting from just $1 worth of IDRX.
                   </p>
                   <Link
-                    href="#"
+                    href="/dashboard"
                     className="text-sm font-medium border-b border-black/20 pb-1 hover:border-black transition-colors inline-flex items-center gap-1 group-hover:gap-2"
                   >
-                    Explore Pools <span>→</span>
+                    Start Investing <span>→</span>
                   </Link>
                 </SpotlightCard>
               </FadeIn>
               <FadeIn delay={0.3} className="h-full">
                 <SpotlightCard className="h-full p-8 group">
                   <h3 className="text-2xl font-semibold mb-4 group-hover:text-black/80 transition-colors">
-                    Track on Lisk
+                    Self-Custody & Track
                   </h3>
                   <p className="text-black/50 mb-6 leading-relaxed">
                     Manage your stock portfolio on-chain with full self-custody.
@@ -246,9 +246,9 @@ export default function Home() {
                       "Explore global stocks tokenized on Lisk. Buy fractional shares with IDRX instantly, no traditional broker needed.",
                   },
                   {
-                    title: "Earn & Trade",
+                    title: "Trade 24/7",
                     description:
-                      "Hold your stocks, add them to liquidity pools to earn yield, or trade them 24/7 on our decentralized exchange.",
+                      "Trade your tokenized stocks anytime, anywhere. Enjoy instant settlement and full control over your assets.",
                   },
                 ]}
               />
