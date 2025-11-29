@@ -1,4 +1,5 @@
 import Link from "next/link";
+import NextImage from "next/image";
 import dynamic from "next/dynamic";
 import { FadeIn } from "@/components/FadeIn";
 import { StockTicker } from "@/components/StockTicker";
@@ -54,7 +55,15 @@ export default function Home() {
 
         <nav className="fixed top-0 w-full z-50 border-b border-black/5 bg-white/70 backdrop-blur-md transition-all duration-300">
           <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
-            <div className="text-xl font-bold tracking-tighter">Stako</div>
+            <div className="relative w-32 h-10">
+              <NextImage
+                src="/images/stako-logo-light.png"
+                alt="Stako Logo"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
             <div className="hidden md:flex gap-8 text-sm font-medium text-black/60">
               <Link
                 href="#markets"

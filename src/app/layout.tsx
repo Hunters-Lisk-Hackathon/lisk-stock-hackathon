@@ -27,6 +27,9 @@ const spaceMono = Space_Mono({
 export const metadata: Metadata = {
   title: "Stako - Tokenized Stocks on Lisk",
   description: "Buy global stocks with IDRX stablecoin on the Lisk blockchain.",
+  icons: {
+    icon: "/images/stako-icon-white.png",
+  },
 };
 
 export default function RootLayout({
