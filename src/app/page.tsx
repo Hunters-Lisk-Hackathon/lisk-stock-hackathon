@@ -57,7 +57,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
             <div className="relative w-32 h-10">
               <NextImage
-                src="/images/stako-logo-light.png"
+                src="/images/stako-logo-transparent.png"
                 alt="Stako Logo"
                 fill
                 className="object-contain"
@@ -131,7 +131,7 @@ export default function Home() {
                 <FadeIn delay={0.6} direction="up">
                   <div className="flex flex-col sm:flex-row gap-4">
                     <Link
-                      href="https://dclex-dex.netlify.app/"
+                      href="/dashboard"
                       className="btn-glow px-6 md:px-8 py-3 md:py-4 bg-black text-white text-base md:text-lg font-medium rounded-full hover:bg-gray-800 transition-all hover:scale-105 active:scale-95 inline-flex items-center justify-center shadow-lg hover:shadow-2xl hover:shadow-black/30 tracking-wide"
                     >
                       Start Trading
@@ -171,7 +171,7 @@ export default function Home() {
                     stocks. No traditional broker account needed.
                   </p>
                   <Link
-                    href="#"
+                    href="/dashboard"
                     className="text-sm font-medium border-b border-black/20 pb-1 hover:border-black transition-colors inline-flex items-center gap-1 group-hover:gap-2"
                   >
                     Start Trading <span>→</span>

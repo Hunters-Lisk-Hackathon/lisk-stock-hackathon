@@ -25,7 +25,7 @@ const stats = [
         suffix: "",
         decimals: 0,
         ticker: true,
-        incrementPerSecond: 0.01 // Adds ~1 user per 100 seconds
+        incrementPerSecond: 0.03
     },
     {
         label: "Trade Latency",

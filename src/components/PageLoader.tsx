@@ -47,8 +47,7 @@ export function PageLoader() {
     };
   }, []);
 
-  const circumference = 2 * Math.PI * 75;
-  const strokeDashoffset = circumference - (progress / 100) * circumference;
+
 
   return (
     <AnimatePresence mode="wait">
@@ -73,61 +72,28 @@ export function PageLoader() {
 
           {/* Main Content */}
           <div className="relative z-10 flex flex-col items-center">
-            {/* Circular Progress Ring */}
-            <div className="relative mb-8">
-              <svg
-                className="w-52 h-52 transform -rotate-90"
-                style={{ willChange: "auto" }}
-              >
-                {/* Background Ring */}
-                <circle
-                  cx="104"
-                  cy="104"
-                  r="75"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  fill="none"
-                  className="text-black/5"
+            {/* Logo in Center */}
+            <div className="relative mb-8 flex items-center justify-center">
+              <div className="relative w-32 h-32 flex items-center justify-center overflow-hidden">
+                <img
+                  src="/images/stako-logo-transparent-alt.png"
+                  alt="Stako Logo"
+                  className="w-full h-full object-contain relative z-10"
                 />
-                {/* Progress Ring - GPU accelerated */}
-                <circle
-                  cx="104"
-                  cy="104"
-                  r="75"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  fill="none"
-                  strokeLinecap="round"
-                  className="text-black"
-                  style={{
-                    strokeDasharray: circumference,
-                    strokeDashoffset: strokeDashoffset,
-                    transition: "stroke-dashoffset 0.05s linear",
-                    willChange: "stroke-dashoffset",
-                  }}
-                />
-              </svg>
 
-              {/* Logo in Center with optimized Shimmer */}
-              <div className="absolute inset-0 flex items-center justify-center">
+                {/* Shine Effect - Intensified */}
                 <motion.div
-                  animate={{
-                    scale: [1, 1.05, 1],
-                  }}
+                  className="absolute inset-0 z-20 bg-gradient-to-tr from-transparent via-white/80 to-transparent"
+                  initial={{ x: "-100%" }}
+                  animate={{ x: "100%" }}
                   transition={{
-                    duration: 2,
+                    duration: 1.5,
                     repeat: Infinity,
+                    repeatDelay: 0.5,
                     ease: "easeInOut",
                   }}
-                  style={{ willChange: "transform" }}
-                  className="relative w-20 h-20 flex items-center justify-center"
-                >
-                  <img
-                    src="/images/stako-icon-black.png"
-                    alt="Stako Logo"
-                    className="w-full h-full object-contain"
-                  />
-                </motion.div>
+                  style={{ skewX: -20 }}
+                />
               </div>
             </div>
 
