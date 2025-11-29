@@ -112,7 +112,7 @@ export default function Home() {
             <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-6 lg:gap-16 items-center py-12 md:py-20 relative z-10">
               <div className="flex flex-col justify-center">
                 <FadeIn delay={0.2} direction="up">
-                  <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-4 md:mb-6 lg:mb-8">
+                  <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-4 md:mb-6 lg:mb-8 leading-[1.1]">
                     <span className="text-gradient">Tokenized Stocks</span>{" "}
                     <br />
                     <span className="text-black/40 tracking-tighter">

@@ -39,7 +39,7 @@ function Hero3DComponent() {
         const handleResize = () => {
             if (containerRef.current) {
                 const width = containerRef.current.clientWidth;
-                const height = Math.min(width, GLOBE.defaultHeight);
+                const height = containerRef.current.clientHeight;
                 setDimensions({ width, height });
             }
         };
@@ -59,7 +59,7 @@ function Hero3DComponent() {
     return (
         <div
             ref={containerRef}
-            className="w-full h-[350px] md:h-[550px] relative flex items-center justify-center cursor-move mix-blend-multiply overflow-hidden"
+            className="w-full h-[300px] sm:h-[350px] md:h-[550px] relative flex items-center justify-center cursor-move mix-blend-multiply overflow-hidden"
             onWheel={handleWheel}
             style={{ touchAction: 'pan-y' }}
         >
