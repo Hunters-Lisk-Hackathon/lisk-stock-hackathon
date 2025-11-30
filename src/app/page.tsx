@@ -116,7 +116,7 @@ export default function Home() {
                     <span className="text-gradient">Tokenized Stocks</span>{" "}
                     <br />
                     <span className="text-black/40 tracking-tighter">
-                      on Lisk.
+                      for Everyone.
                     </span>
                   </h1>
                 </FadeIn>
