@@ -22,13 +22,17 @@ export function StockCard({ symbol, name, price, logo, color, ownedAmount = 0 }:
 
                 <div className="relative z-10">
                     <div className="flex items-start justify-between mb-4">
-                        <div className={`w-12 h-12 rounded-2xl flex items-center justify-center overflow-hidden ${color || 'bg-gray-100'} shadow-inner`}>
-                            {/* Placeholder for actual logo logic */}
+                        <div className={`w-12 h-12 rounded-2xl flex items-center justify-center overflow-hidden bg-white shadow-sm border border-gray-100`}>
                             <div className="w-full h-full relative">
-                                <div className="absolute inset-0 flex items-center justify-center text-white font-bold text-sm">
-                                    {!logo && symbol[0]}
-                                </div>
-                                {logo && <Image src={logo} alt={symbol} fill className="object-cover" />}
+                                {logo ? (
+                                    <div className="absolute inset-2">
+                                        <Image src={logo} alt={symbol} fill className="object-contain" />
+                                    </div>
+                                ) : (
+                                    <div className={`absolute inset-0 flex items-center justify-center text-white font-bold text-sm ${color || 'bg-gray-100'}`}>
+                                        {symbol[0]}
+                                    </div>
+                                )}
                             </div>
                         </div>
                         {ownedAmount > 0 && (

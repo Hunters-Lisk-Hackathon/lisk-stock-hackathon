@@ -1,3 +1,5 @@
+"use client";
+
 import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { PortfolioSummary } from "@/components/dashboard/PortfolioSummary";
 import { ActionButtons } from "@/components/dashboard/ActionButtons";
@@ -7,7 +9,12 @@ import { Sidebar } from "@/components/dashboard/Sidebar";
 import { MarketNews } from "@/components/dashboard/MarketNews";
 import { FadeIn } from "@/components/FadeIn";
 
+import { useAccount } from "wagmi";
+import { ConnectWalletView } from "@/components/dashboard/ConnectWalletView";
+
 export default function DashboardPage() {
+    const { isConnected } = useAccount();
+
     return (
         <div className="min-h-screen bg-gray-50 pb-24 md:pb-0 md:pl-64 relative">
             <div className="fixed inset-0 w-full h-full bg-dot-grid z-0 pointer-events-none opacity-40"></div>
@@ -22,25 +29,35 @@ export default function DashboardPage() {
 
                     <div className="md:grid md:grid-cols-12 md:gap-8">
                         <div className="md:col-span-12 lg:col-span-8">
-                            <div className="md:flex md:items-center md:justify-between md:mb-8">
+                            {!isConnected ? (
                                 <FadeIn delay={0.2}>
-                                    <PortfolioSummary />
+                                    <ConnectWalletView />
                                 </FadeIn>
-                                <div className="hidden md:block">
-                                    <FadeIn delay={0.3}>
-                                        <ActionButtons />
-                                    </FadeIn>
-                                </div>
-                            </div>
+                            ) : (
+                                <>
+                                    <div className="md:flex md:items-center md:justify-between md:mb-8">
+                                        <FadeIn delay={0.2}>
+                                            <PortfolioSummary />
+                                        </FadeIn>
+                                        <div className="hidden md:block">
+                                            <FadeIn delay={0.3}>
+                                                <ActionButtons />
+                                            </FadeIn>
+                                        </div>
+                                    </div>
 
-                            <div className="md:hidden">
-                                <FadeIn delay={0.3}>
-                                    <ActionButtons />
-                                </FadeIn>
-                            </div>
+                                    <div className="md:hidden">
+                                        <FadeIn delay={0.3}>
+                                            <ActionButtons />
+                                        </FadeIn>
+                                    </div>
+                                </>
+                            )}
 
                             <FadeIn delay={0.4}>
-                                <StockList />
+                                <div className={!isConnected ? "opacity-50 pointer-events-none filter blur-sm select-none" : ""}>
+                                    <StockList />
+                                </div>
                             </FadeIn>
                         </div>
 

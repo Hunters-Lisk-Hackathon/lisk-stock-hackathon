@@ -20,6 +20,10 @@ interface StockListItemProps {
     color: string;
 }
 
+import Image from "next/image";
+
+// ...
+
 function StockListItem({ symbol, name, price, logo, color }: StockListItemProps) {
     // Generate random sparkline data for this item
     // Use symbol string to seed randomness so it's consistent for the same symbol but different across symbols
@@ -36,11 +40,16 @@ function StockListItem({ symbol, name, price, logo, color }: StockListItemProps)
         <Link href={`/dashboard/buy/${symbol}`}>
             <div className="flex items-center justify-between p-4 bg-white rounded-2xl mb-3 border border-gray-50 hover:border-gray-100 transition-colors cursor-pointer group">
                 <div className="flex items-center gap-4">
-                    <div className={`w-12 h-12 rounded-full overflow-hidden relative ${color} transition-transform group-hover:scale-105`}>
-                        {/* Placeholder logic */}
-                        <div className="absolute inset-0 flex items-center justify-center text-white font-bold">
-                            {/* Image would go here */}
-                        </div>
+                    <div className={`w-12 h-12 rounded-full overflow-hidden relative bg-white shadow-sm border border-gray-100 transition-transform group-hover:scale-105`}>
+                        {logo ? (
+                            <div className="absolute inset-2">
+                                <Image src={logo} alt={symbol} fill className="object-contain" />
+                            </div>
+                        ) : (
+                            <div className={`absolute inset-0 flex items-center justify-center text-white font-bold ${color}`}>
+                                {symbol[0]}
+                            </div>
+                        )}
                     </div>
                     <div>
                         <h4 className="font-bold text-base group-hover:text-blue-600 transition-colors">{symbol}</h4>
@@ -78,6 +87,7 @@ export function StockList() {
         name: data.name,
         price: data.rate,
         color: data.color,
+        logo: data.logo,
         balance: parseFloat(stocks[symbol]?.formattedBalance || "0"),
     }));
 
@@ -100,7 +110,7 @@ export function StockList() {
                                 symbol={stock.symbol}
                                 name={stock.name}
                                 price={`${formatNumber(stock.price)} IDRX`}
-                                logo=""
+                                logo={stock.logo}
                                 color={stock.color}
                                 ownedAmount={stock.balance}
                             />
@@ -124,7 +134,7 @@ export function StockList() {
                             symbol={stock.symbol}
                             name={stock.name}
                             price={`${formatNumber(stock.price)} IDRX`}
-                            logo=""
+                            logo={stock.logo}
                             color={stock.color}
                         />
                     ))}
