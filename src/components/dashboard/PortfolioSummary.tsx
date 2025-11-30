@@ -1,8 +1,10 @@
+
 "use client";
 
 import { X, Loader2 } from "lucide-react";
 import { usePortfolio } from "@/hooks/usePortfolio";
 import { useAccount } from "wagmi";
+import Image from "next/image";
 
 export function PortfolioSummary() {
     const { isConnected } = useAccount();
@@ -51,7 +53,7 @@ export function PortfolioSummary() {
                 <div className="relative z-10">
                     <h3 className="text-white/70 font-medium mb-2 flex items-center gap-2">
                         Total Portfolio Value
-                        <span className="px-2 py-0.5 bg-white/10 rounded-full text-[10px] text-white/80 backdrop-blur-sm border border-white/5">
+                        <span className="px-2 py-0.5 bg-green-500/20 rounded-full text-[10px] text-green-400 backdrop-blur-sm border border-green-500/20">
                             +2.4%
                         </span>
                     </h3>
@@ -59,13 +61,18 @@ export function PortfolioSummary() {
                         {isLoading ? (
                             <div className="h-10 w-48 bg-white/10 rounded animate-pulse"></div>
                         ) : (
-                            `Rp ${formatBalance(portfolioValue.toString())}`
+                            `Rp ${formatBalance(portfolioValue.toString())} `
                         )}
                     </div>
 
                     <div className="flex items-center gap-4 p-3 bg-white/5 rounded-2xl backdrop-blur-sm border border-white/5 hover:bg-white/10 transition-colors">
-                        <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-blue-900/50">
-                            X
+                        <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-blue-900/50 relative overflow-hidden">
+                            <Image
+                                src="/images/idrx.png"
+                                alt="IDRX"
+                                fill
+                                className="object-contain p-1"
+                            />
                         </div>
                         <div>
                             <p className="text-xs text-white/60 mb-0.5">Available to Trade</p>

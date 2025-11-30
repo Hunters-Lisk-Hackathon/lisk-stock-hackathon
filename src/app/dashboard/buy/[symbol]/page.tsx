@@ -8,6 +8,7 @@ import { ArrowLeft, Loader2, CheckCircle } from "lucide-react";
 import Link from "next/link";
 import { FadeIn } from "@/components/FadeIn";
 import { formatNumber, parseNumber } from "@/utils/format";
+import Image from "next/image";
 
 export default function BuyPage() {
     const params = useParams();
@@ -20,6 +21,8 @@ export default function BuyPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [error, setError] = useState("");
+
+    const [imageError, setImageError] = useState(false);
 
     const stock = STOCKS[symbol as keyof typeof STOCKS];
 
@@ -114,10 +117,15 @@ export default function BuyPage() {
 
                             <div className="flex justify-center mb-10">
                                 <div className="w-24 h-24 rounded-3xl bg-white shadow-xl border border-gray-100 p-4 flex items-center justify-center relative">
-                                    {stock.logo ? (
+                                    {stock.logo && !imageError ? (
                                         <div className="relative w-full h-full">
-                                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                                            <img src={stock.logo} alt={symbol} className="w-full h-full object-contain" />
+                                            <Image
+                                                src={stock.logo}
+                                                alt={symbol}
+                                                fill
+                                                className="object-contain"
+                                                onError={() => setImageError(true)}
+                                            />
                                         </div>
                                     ) : (
                                         <span className="text-2xl font-bold">{symbol[0]}</span>
