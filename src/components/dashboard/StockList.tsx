@@ -21,26 +21,43 @@ interface StockListItemProps {
 }
 
 function StockListItem({ symbol, name, price, logo, color }: StockListItemProps) {
+    // Generate random sparkline data for this item
+    // Use symbol string to seed randomness so it's consistent for the same symbol but different across symbols
+    const seed = symbol.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    const data = Array.from({ length: 10 }).map((_, i) => ({
+        value: 100 + Math.sin((i + seed) * 0.5) * 20 + (Math.random() * 10)
+    }));
+
+    const isPositive = data[data.length - 1].value >= data[0].value;
+    const strokeColor = isPositive ? "#22c55e" : "#ef4444"; // Green or Red
+    const fillColor = isPositive ? "#dcfce7" : "#fee2e2"; // Light Green or Light Red
+
     return (
         <Link href={`/dashboard/buy/${symbol}`}>
-            <div className="flex items-center justify-between p-4 bg-white rounded-2xl mb-3 border border-gray-50 hover:border-gray-100 transition-colors cursor-pointer">
+            <div className="flex items-center justify-between p-4 bg-white rounded-2xl mb-3 border border-gray-50 hover:border-gray-100 transition-colors cursor-pointer group">
                 <div className="flex items-center gap-4">
-                    <div className={`w-12 h-12 rounded-full overflow-hidden relative ${color}`}>
+                    <div className={`w-12 h-12 rounded-full overflow-hidden relative ${color} transition-transform group-hover:scale-105`}>
                         {/* Placeholder logic */}
                         <div className="absolute inset-0 flex items-center justify-center text-white font-bold">
                             {/* Image would go here */}
                         </div>
                     </div>
                     <div>
-                        <h4 className="font-bold text-base">{symbol}</h4>
+                        <h4 className="font-bold text-base group-hover:text-blue-600 transition-colors">{symbol}</h4>
                         <p className="text-xs text-gray-500">{name}</p>
                     </div>
                 </div>
 
-                <div className="h-10 w-24">
+                <div className="h-10 w-24 opacity-70 group-hover:opacity-100 transition-opacity">
                     <ResponsiveContainer width="100%" height="100%">
                         <AreaChart data={data}>
-                            <Area type="monotone" dataKey="value" stroke="#3b82f6" fill="#eff6ff" strokeWidth={2} />
+                            <Area
+                                type="monotone"
+                                dataKey="value"
+                                stroke={strokeColor}
+                                fill={fillColor}
+                                strokeWidth={2}
+                            />
                         </AreaChart>
                     </ResponsiveContainer>
                 </div>

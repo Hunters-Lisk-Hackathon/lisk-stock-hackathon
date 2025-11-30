@@ -44,18 +44,33 @@ export function Sidebar() {
                     <Home className="w-5 h-5" />
                     <span className="font-medium">Home</span>
                 </Link>
-                <Link href="#" className="flex items-center gap-3 px-4 py-3 text-gray-500 hover:bg-gray-50 hover:text-black rounded-xl transition-colors">
-                    <Repeat className="w-5 h-5" />
-                    <span className="font-medium">Trade</span>
-                </Link>
-                <Link href="#" className="flex items-center gap-3 px-4 py-3 text-gray-500 hover:bg-gray-50 hover:text-black rounded-xl transition-colors">
-                    <FileText className="w-5 h-5" />
-                    <span className="font-medium">History</span>
-                </Link>
-                <Link href="#" className="flex items-center gap-3 px-4 py-3 text-gray-500 hover:bg-gray-50 hover:text-black rounded-xl transition-colors">
-                    <Settings className="w-5 h-5" />
-                    <span className="font-medium">Settings</span>
-                </Link>
+                <div className="group relative">
+                    <Link href="#" className="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-gray-50 hover:text-gray-600 rounded-xl transition-colors cursor-not-allowed">
+                        <Repeat className="w-5 h-5" />
+                        <span className="font-medium">Trade</span>
+                    </Link>
+                    <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[10px] font-bold px-2 py-0.5 bg-gray-100 text-gray-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                        SOON
+                    </span>
+                </div>
+                <div className="group relative">
+                    <Link href="#" className="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-gray-50 hover:text-gray-600 rounded-xl transition-colors cursor-not-allowed">
+                        <FileText className="w-5 h-5" />
+                        <span className="font-medium">History</span>
+                    </Link>
+                    <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[10px] font-bold px-2 py-0.5 bg-gray-100 text-gray-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                        SOON
+                    </span>
+                </div>
+                <div className="group relative">
+                    <Link href="#" className="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-gray-50 hover:text-gray-600 rounded-xl transition-colors cursor-not-allowed">
+                        <Settings className="w-5 h-5" />
+                        <span className="font-medium">Settings</span>
+                    </Link>
+                    <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[10px] font-bold px-2 py-0.5 bg-gray-100 text-gray-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                        SOON
+                    </span>
+                </div>
             </nav>
 
             <div className="mt-auto pt-6 border-t border-gray-100">
