@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Outfit, Plus_Jakarta_Sans, Space_Mono } from "next/font/google";
 import "./globals.css";
 import { PannaProvider } from "@/components/providers/PannaProvider";
+import { Web3Provider } from "@/components/providers/Web3Provider";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -53,7 +54,9 @@ export default function RootLayout({
       <body
         className={`${outfit.variable} ${jakarta.variable} ${spaceMono.variable} font-sans antialiased`}
       >
-        <PannaProvider>{children}</PannaProvider>
+        <Web3Provider>
+          <PannaProvider>{children}</PannaProvider>
+        </Web3Provider>
       </body>
     </html>
   );

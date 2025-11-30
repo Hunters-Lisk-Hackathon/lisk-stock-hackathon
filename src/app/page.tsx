@@ -3,7 +3,7 @@ import NextImage from "next/image";
 import dynamic from "next/dynamic";
 import { FadeIn } from "@/components/FadeIn";
 import { StockTicker } from "@/components/StockTicker";
-// import { Hero3D } from "@/components/Hero3D";
+import { Hero3D } from "@/components/Hero3D";
 import { PageLoader } from "@/components/PageLoader";
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { CursorFollower } from "@/components/CursorFollower";
