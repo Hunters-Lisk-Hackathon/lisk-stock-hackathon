@@ -45,7 +45,7 @@ body {
   }
 
   .bg-dot-grid {
-    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.3) 1px, transparent 1px);
     background-size: 24px 24px;
   }
 
@@ -133,6 +133,7 @@ body {
   0% {
     background-position: -200% 0;
   }
+
   100% {
     background-position: 200% 0;
   }
@@ -140,10 +141,13 @@ body {
 
 /* Slow bounce for ready indicator */
 @keyframes bounce-slow {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(-5px) translateZ(0);
     animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
   }
+
   50% {
     transform: translateY(0) translateZ(0);
     animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
@@ -152,9 +156,12 @@ body {
 
 /* Slow pulse for ready text */
 @keyframes pulse-slow {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.3;
   }
+
   50% {
     opacity: 0.6;
   }
