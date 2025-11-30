@@ -148,7 +148,7 @@ export default function Home() {
 
               <FadeIn delay={0.8} direction="up" scale={0.85}>
                 <div className="parallax-globe">
-                  {/* <Hero3D /> */}
+                  <Hero3D />
                 </div>
               </FadeIn>
             </div>
